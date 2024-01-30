@@ -1,7 +1,7 @@
 
 NAME		= philosophers
 
-SRCS		=  srcs/main.c
+SRCS		=  srcs/philo.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -11,7 +11,7 @@ CFLAGS		=-Iincludes
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lpthread
 
 clean:
 	@rm -f $(OBJS)
