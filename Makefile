@@ -1,7 +1,7 @@
 
 NAME		= philosophers
 
-SRCS		=  srcs/philo.c
+SRCS		=  srcs/philo.c srcs/atoi.c
 
 OBJS		= $(SRCS:.c=.o)
 

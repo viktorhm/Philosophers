@@ -6,16 +6,18 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/01/30 16:21:49 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:14:09 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "philosophers.h"
+#include "philosophers.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 #include <pthread.h>
+#include <sys/time.h>
 
+//  echo "\x1b[38;2;255;0;0;5mSal\x1b[38;2;0;255;0;7mu\e[0mt"
 
 // static void	*routine(void *arg)
 // {
@@ -52,6 +54,42 @@
 // 	printf("NUM: %d", *num);
 // 	}
 
+int cretate_philo(t_data data)
+{
+
+int nb =0;
+while(data.nb_philo)
+{
+	pthread_t	nb;
+
+
+}
+
+
+}
+
+long int get_time(long init_time)
+{
+	long int seconde = 0 ;
+	long int deltatime = 0 ;
+	struct timeval	time;
+
+	gettimeofday(&time,NULL);
+
+	seconde = time.tv_sec * 1000 + time.tv_usec / 1000 ;
+	deltatime = seconde - init_time ;
+
+
+	return(deltatime);
+}
+
+int ft_erreur(void)
+{
+write(1,"erreur",6);
+
+return(1);
+}
+
 int is_char_neg (char *str)
 {
 	int i = 0 ;
@@ -60,40 +98,39 @@ int is_char_neg (char *str)
 		if(str[i]>= '0' && str[i]<= '9')
 			i++;
 		else
-			return(0);
+			return(1);
 	}
-	return(1);
+	return(0);
 }
 
 
 int main (int argc , char **argv)
 {
-int nb_philo = 0 ;
-int time_deth = 0 ;
-int time_eat = 0 ;
-int time_slepp = 0 ;
-
+	t_data data ;
 
 if(argc == 4 || argc == 5)
 {
-	int j = 0 ;
-	while(argc == j)
+	int j = 1 ;
+	while(argc != j)
 	{
 		if(is_char_neg(argv[j]))
 			return(ft_erreur());
 		j++;
 	}
-	nb_philo = ft_atoi() ;
-	time_deth = ft_atoi() ;
-	time_eat = ft_atoi() ;
-	time_slepp = ft_atoi();
+	data.nb_philo = ft_atoi(argv[0]) ;
+	data.time_deth = ft_atoi(argv[1]) ;
+	data.time_eat = ft_atoi(argv[2]) ;
+	data.time_slepp = ft_atoi(argv[3]);
+	data.deltat = 0 ;
+
+	data.deltat = get_time(data.deltat);
 
 
-
-
+	printf("%ld ",get_time(data.deltat));
+	sleep(1);
+	printf("%ld ",get_time(data.deltat));
 
 }
-
 
 	return(0);
 }
