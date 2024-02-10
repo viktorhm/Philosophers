@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/09 17:14:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:06:04 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,7 @@
 int cretate_philo(t_data data)
 {
 
-int nb =0;
-while(data.nb_philo)
-{
-	pthread_t	nb;
-
-
-}
+	while()
 
 
 }
@@ -122,7 +116,6 @@ if(argc == 4 || argc == 5)
 	data.time_eat = ft_atoi(argv[2]) ;
 	data.time_slepp = ft_atoi(argv[3]);
 	data.deltat = 0 ;
-
 	data.deltat = get_time(data.deltat);
 
 
