@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/13 22:35:24 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:52:19 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,49 @@
 // color :  echo "\x1b[38;2;255;0;0;5mSal\x1b[38;2;0;255;0;7mu\e[0mt"
 
 
-int init(t_data *data)
+
+
+void presocratiques(t_data *data)
+{	
+	int i = 0;
+	t_philo *philo ;
+
+	data->delta_t = get_time(data->delta_t); //  start compteur time memeroy time 
+	
+	while(data->nb_philo != i++)
+	{
+		philo = data->philos + i ;
+		philo->index = i;
+		philo->last_eat = 0;
+		philo->round = 0 ;
+		philo->data = data;
+		
+		assign_fork(philo , data->forks, i);
+		
+	}
+
+
+
+
+}
+
+
+int create_mutex(t_data *data)
 {
-	data->philos = malloc(sizeof(t_philo) * data->nb_philo);
-	data->forks = malloc(sizeof(t_fork)* data->nb_philo);
-
-
+	data->philos = malloc(sizeof(t_philo) * data-> nb_philo);
+	data->forks = mallo(sizeof(t_philo) * data-> nb_philo);
+	int i = 0 ;
+	while(i != data->nb_philo)
+	{
+		pthread_mutex_init(&data->forks[i], NULL);
+		data->forks[i].fork_id = i; // eviter de le reinite;
+		i++;
+	}
+	presocratiques( &data);
+	//pthread_mutex_init(&data->time_eat, NULL);
+	//pthread_nutex_init(&data->time_deth, NULL);
+	//gestion d'erreur a gerer ; 
+	return(0);
 }
 
 int parsing(t_data *data , char **argv , int argc)
@@ -42,15 +79,17 @@ int j = 1 ;
 	data->time_deth = ft_atoi(argv[2]) ;
 	data->time_eat = ft_atoi(argv[3]) ;
 	data->time_slepp = ft_atoi(argv[4]);
-	data->deltat = 0 ;
+	//data->delta_t = -1 ;
+	if(data->nb_philo <= 6 || data->time_deth <= 6 || data->time_eat <= 6 || data->time_slepp <= 6) // pas moins de 60 ms 
+		return(1);
 	if(argc == 6)
 	{
 		data->round = ft_atoi(argv[5]);
+		if(data->round <= 0)
+			return(1);
 	}
-
-	//data->deltat = get_time(data->nb_philo);
-
-
+	return(0);
+	//data->deltat = get_time(data->nb_philo); //init (a)voir
 }
 
 long int get_time(long init_time)
@@ -95,13 +134,11 @@ int main (int argc , char **argv)
 
 if(argc == 5 || argc == 6)
 {
-	parsing( &data , argv , argc); // parsing
-
-	data.deltat = get_time(data.deltat);
-	printf("%ld ",get_time(data.deltat)); 
-	sleep(1);
-	printf("%ld ",get_time(data.deltat));
-
+	if( parsing( &data , argv , argc)) // parsing
+		ft_erreur();
+	if(create_mutex(&data));
+		ft_erreur();
+	
 }
 	error_exit();
 
