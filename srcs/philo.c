@@ -6,29 +6,32 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/16 19:52:19 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:23:01 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-#include <pthread.h>
-#include <sys/time.h>
+
 
 // color :  echo "\x1b[38;2;255;0;0;5mSal\x1b[38;2;0;255;0;7mu\e[0mt"
+
+
+void assign_fork(t_philo *philo, t_data *data , int i )
+{
+
+return ;
+}
 
 
 
 
 void presocratiques(t_data *data)
-{	
+{
 	int i = 0;
 	t_philo *philo ;
+	data->delta_t = 0 ;
+	data->delta_t = get_time(data->delta_t); //  start compteur time memeroy time
 
-	data->delta_t = get_time(data->delta_t); //  start compteur time memeroy time 
-	
 	while(data->nb_philo != i++)
 	{
 		philo = data->philos + i ;
@@ -36,9 +39,9 @@ void presocratiques(t_data *data)
 		philo->last_eat = 0;
 		philo->round = 0 ;
 		philo->data = data;
-		
+
 		assign_fork(philo , data->forks, i);
-		
+
 	}
 
 
@@ -61,7 +64,7 @@ int create_mutex(t_data *data)
 	presocratiques( &data);
 	//pthread_mutex_init(&data->time_eat, NULL);
 	//pthread_nutex_init(&data->time_deth, NULL);
-	//gestion d'erreur a gerer ; 
+	//gestion d'erreur a gerer ;
 	return(0);
 }
 
@@ -80,7 +83,7 @@ int j = 1 ;
 	data->time_eat = ft_atoi(argv[3]) ;
 	data->time_slepp = ft_atoi(argv[4]);
 	//data->delta_t = -1 ;
-	if(data->nb_philo <= 6 || data->time_deth <= 6 || data->time_eat <= 6 || data->time_slepp <= 6) // pas moins de 60 ms 
+	if(data->nb_philo <= 6 || data->time_deth <= 6 || data->time_eat <= 6 || data->time_slepp <= 6) // pas moins de 60 ms
 		return(1);
 	if(argc == 6)
 	{
@@ -138,7 +141,7 @@ if(argc == 5 || argc == 6)
 		ft_erreur();
 	if(create_mutex(&data));
 		ft_erreur();
-	
+
 }
 	error_exit();
 
