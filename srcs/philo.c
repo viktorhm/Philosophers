@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/17 15:23:01 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/18 14:24:28 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // color :  echo "\x1b[38;2;255;0;0;5mSal\x1b[38;2;0;255;0;7mu\e[0mt"
 
 
-void assign_fork(t_philo *philo, t_data *data , int i )
+void assign_fork(t_philo *philo, t_data fork , int i )
 {
 
 return ;
@@ -53,7 +53,7 @@ void presocratiques(t_data *data)
 int create_mutex(t_data *data)
 {
 	data->philos = malloc(sizeof(t_philo) * data-> nb_philo);
-	data->forks = mallo(sizeof(t_philo) * data-> nb_philo);
+	data->forks = malloc(sizeof(t_philo) * data-> nb_philo);
 	int i = 0 ;
 	while(i != data->nb_philo)
 	{
@@ -61,7 +61,7 @@ int create_mutex(t_data *data)
 		data->forks[i].fork_id = i; // eviter de le reinite;
 		i++;
 	}
-	presocratiques( &data);
+	presocratiques(data);
 	//pthread_mutex_init(&data->time_eat, NULL);
 	//pthread_nutex_init(&data->time_deth, NULL);
 	//gestion d'erreur a gerer ;
@@ -143,7 +143,7 @@ if(argc == 5 || argc == 6)
 		ft_erreur();
 
 }
-	error_exit();
+	ft_erreur();
 
 	return(0);
 }
