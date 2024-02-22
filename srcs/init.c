@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/22 01:15:54 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:35:14 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void presocratiques(t_data *data)
 	data->delta_t = 0;
 	data->delta_t = get_time(data->delta_t); //  start compteur time memeroy time
 
-	while(data->nb_philo != i++)
+	while(data->nb_philo > i++)
 	{
 		data->philos[i].index = i;
 		data->philos[i].is_eating = 0 ;

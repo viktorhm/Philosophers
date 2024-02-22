@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/22 00:51:19 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:33:06 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_philo
 	pthread_mutex_t eat;
 }		t_philo ;
 
+
 typedef struct s_data
 {
 
@@ -68,7 +69,6 @@ int ft_atoi(char *str);
 
 //init//
 void presocratiques(t_data *data);
-void assign_fork(t_philo *philo , t_fork *forks, int i);
 int create_mutex(t_data *data);
 long int get_time(long init_time);
 

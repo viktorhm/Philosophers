@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:17 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/20 16:53:46 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:06:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,11 @@ void print_int_value(int nb)
 
 int simulation_of_life(t_data *data)
 {
-	int i = 0 ;
-	if(0 == data->time_eat)
-		return ;
-	else if( 1 == data->nb_philo
-		)
-	else 
+	int i = 0  ;
+	while (data->nb_philo != i )
 	{
-		while(i++ < data->nb_philo)
-			create_mutex(&data->philos[i].);
-
+		//printf("%d",data->philos[i].left);
+		i++;
 	}
+	return(0);
 }
-
-static void eating(t_data data)
-{
-	return ;
-}
-static void slepp(t_data data);
-static void dead(t_data data);
