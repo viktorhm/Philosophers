@@ -1,12 +1,12 @@
 
 NAME		= philosophers
 
-SRCS		=  srcs/philo.c srcs/atoi.c
+SRCS		=  srcs/init.c srcs/parsing.c srcs/philo.c srcs/simulation.c
 
 OBJS		= $(SRCS:.c=.o)
 
 CC		= cc
-CFLAGS		=-Iincludes
+CFLAGS		=-Iincludes -g
 
 all: $(NAME)
 
