@@ -6,13 +6,13 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:14:00 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/22 00:48:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:25:41 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-
+https://github.com/tremerin/Philo/blob/main/philo/set_table.c
 int parsing(t_data *data , char **argv , int argc)
 {
 

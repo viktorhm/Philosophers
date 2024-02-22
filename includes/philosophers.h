@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/22 11:33:06 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:25:35 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,24 @@
 
 typedef struct s_data t_data;
 
+typedef struct s_fork
+{
+	pthread_mutex_t mutex_fork ;
+	int	pos;
+	int free; //??
+}	t_fork;
 
 typedef struct s_philo
 {
-	int index;
 
+	pthread_t	philo_thread;
+	int			index;
 	int			is_eating;
-	long int	last_eat;
-	long int	time_sleep;
-
-	int			round;
-
+	long int	last_eat; //time_t -> best ??
+	long int	time_die;
 	int			left;
 	int			right;
 
-	t_data		*data;
-	pthread_mutex_t mutex;
-	pthread_mutex_t eat;
 }		t_philo ;
 
 
@@ -54,8 +55,9 @@ long	delta_t; //start time
 long	round; // optionale
 
 t_philo *philos ; // tout les philo
-pthread_mutex_t	*forks;
-pthread_mutex_t	info;
+t_fork *forks;
+
+pthread_mutex_t	mutex;
 pthread_mutex_t	seneque;
 
 }			t_data ;

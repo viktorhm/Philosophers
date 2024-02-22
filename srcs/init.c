@@ -6,47 +6,69 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/22 11:35:14 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:17:27 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "philosophers.h"
 
+static void inti_philo(t_data *data)
+{
+	int i = 0 ;
+	pthread_mutex_init(&data->mutex ,NULL);
+	while(i < data->nb_philo)
+	{
+		pthread_mutex_lock(&data->mutex);
+		if(i < data->nb_philo)
+			pthread_create(&data->philos[i].philo_thread, NULL, routine, table);
+		i++;
+		}
+}
+
+
 
 void presocratiques(t_data *data)
 {
-	int i = 0;
-
-	data->delta_t = 0;
-	data->delta_t = get_time(data->delta_t); //  start compteur time memeroy time
+	int	i = 0;
 
 	while(data->nb_philo > i++)
 	{
 		data->philos[i].index = i;
-		data->philos[i].is_eating = 0 ;
-		data->philos[i].last_eat = 0;
-		data->philos[i].round = 0 ;
-		data->philos[i].data = data;
-		pthread_mutex_init(&data->philos[i].mutex , NULL);
-		pthread_mutex_init(&data->philos[i].eat, NULL);
-		pthread_mutex_lock(&data->philos[i].eat);
-		pthread_mutex_init(&data->forks[i],NULL);
-	i++;
+		if(i == 0)
+			data->philos[i].left= data->nb_philo -1 ;
+		else
+			data->philos[i].left = i - 1;
+		data->philos[i].right = i ;
+		i++;
 	}
 }
 
+void set_fork(t_data *data)
+{
+	int i= 0 ;
+	while(data->nb_philo < i)
+	{
+		pthread_mutex_init(&data->forks,NULL);
+		data->forks[i].free = 1;
+		data->forks[i].pos = i;
+		i++;
+	}
+
+
+}
 
 int create_mutex(t_data *data)
 {
 	int i = 0 ;
 	if(!(data->philos = malloc(sizeof(t_philo) * data-> nb_philo)))
 		return(1);
+	if(!(data->forks = malloc(sizeof(t_fork)* data->nb_philo)));
 
-	pthread_mutex_init(&data->info, NULL);
-	pthread_mutex_init(&data->seneque, NULL);
-	pthread_mutex_lock(&data->seneque);
+	pthread_mutex_init(&data->mutex, NULL);
 
+	set_fork(data);
+	set_philo(data);
 	presocratiques(data);
 
 	return(0);
