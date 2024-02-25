@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/25 06:37:58 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/25 08:37:24 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_data
 	long	time_slepp;
 // USE FOR MY
 	int		nb_p_fninsh;
-	bool	stop;
+	int		stop;
 	long	delta_t; //start time
 	long	round; // optionale not verry
 //MUTEX of SHIT

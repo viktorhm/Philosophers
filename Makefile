@@ -1,16 +1,18 @@
 
 NAME		= philosophers
 
+HEADER		= ./includes/
+
 SRCS		=  srcs/init.c srcs/parsing.c srcs/philo.c srcs/simulation.c
 
 OBJS		= $(SRCS:.c=.o)
 
-CC		= cc
-CFLAGS		= -Iincludes -g -lpthread
+CC		= gcc
+CFLAGS		= -Werror -Wall -Wextra -g -I$(HEADER) -pthread
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HEADER)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:

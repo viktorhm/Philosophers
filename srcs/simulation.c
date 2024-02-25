@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:17 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/25 06:44:02 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/25 07:59:11 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ return(1);
 void *thead(void *tmp_data)
 {
 	t_philo	*philo;
-	philo = (t_philo *)tmp_data;
+	philo = (t_philo*)tmp_data;
 
-	if(philo->id % 2 == 0) // tu sais pour quelle probeleme
-		ft_usleep(philo->data->time_eat / 10);
+	//if(philo->id % 2 == 0) // tu sais pour quelle probeleme
+		//ft_usleep(philo->data->time_eat / 10);
 	while(check_death(philo, 0))
 	{
 		pthread_create(&philo->t_id, NULL , is_dead , tmp_data);
-		activity(philo);
+		//activity(philo);
 		pthread_detach(philo->t_deah);
 		if((int) ++philo->nb_eat == philo->data->round)
 		{
@@ -157,7 +157,7 @@ int simulation_of_life(t_data *data)
 
 	while (i != data->nb_philo)
 	{
-		// data->philos[i].data = data; // uslesse ?
+		//data->philos[i].data = data; // uslesse ?
 		if(pthread_create(&data->philos[i].t_id, NULL ,thead , &data->philos[i]) != 0)
 			return(1);
 		i++;
