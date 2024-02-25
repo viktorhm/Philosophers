@@ -6,86 +6,73 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/22 16:17:27 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/25 04:44:56 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "philosophers.h"
 
-static void inti_philo(t_data *data)
+int init_data(t_data *data)
 {
-	int i = 0 ;
-	pthread_mutex_init(&data->mutex ,NULL);
-	while(i < data->nb_philo)
-	{
-		pthread_mutex_lock(&data->mutex);
-		if(i < data->nb_philo)
-			pthread_create(&data->philos[i].philo_thread, NULL, routine, table);
-		i++;
-		}
-}
-
-
-
-void presocratiques(t_data *data)
-{
-	int	i = 0;
-
-	while(data->nb_philo > i++)
-	{
-		data->philos[i].index = i;
-		if(i == 0)
-			data->philos[i].left= data->nb_philo -1 ;
-		else
-			data->philos[i].left = i - 1;
-		data->philos[i].right = i ;
-		i++;
-	}
-}
-
-void set_fork(t_data *data)
-{
-	int i= 0 ;
-	while(data->nb_philo < i)
-	{
-		pthread_mutex_init(&data->forks,NULL);
-		data->forks[i].free = 1;
-		data->forks[i].pos = i;
-		i++;
-	}
-
-
-}
-
-int create_mutex(t_data *data)
-{
-	int i = 0 ;
 	if(!(data->philos = malloc(sizeof(t_philo) * data-> nb_philo)))
 		return(1);
-	if(!(data->forks = malloc(sizeof(t_fork)* data->nb_philo)));
 
-	pthread_mutex_init(&data->mutex, NULL);
+	data->delta_t = get_time();
+	data->round = 0;
+	data->nb_p_fninsh = 0 ;
+	data->stop= 0 ;
 
-	set_fork(data);
-	set_philo(data);
+
+	pthread_mutex_init(&data->mutex ,NULL);
+	pthread_mutex_init(&data->dead, NULL);
+	pthread_mutex_init(&data->eat, NULL);
+	pthread_mutex_init(&data->finish, NULL);
+
 	presocratiques(data);
 
 	return(0);
 }
 
 
-long int get_time(long init_time)
+int presocratiques(t_data *data)
 {
-	long int seconde = 0 ;
-	long int deltatime = 0 ;
-	struct timeval	time;
+	int	i = 0;
+	while(data->nb_philo > i++)
+	{
+		data->philos[i].id = i + 1;
+		data->philos[i].last_eat = data->delta_t;
+		data->philos[i].nb_eat = 0;
+		data->philos[i].finish = 0;
+		set_fork(data , i);
+	}
+	return(0);
+}
 
+int set_fork(t_data *data ,int i)
+{
+	data->philos[i].fork_right = NULL;
+	pthread_mutex_init(&data->philos[i].fork_left, NULL);
+
+	if(data->nb_philo == 1)
+		return(1);
+	if(i == data->nb_philo - 1)
+		data->philos[i].fork_right = &data->philos[0].fork_left; // cercle fork
+	else
+		data->philos[i].fork_right = &data->philos[i + 1].fork_left;
+	return(0);
+}
+
+
+long int get_time(void)
+{
+	long int delta = 0 ;
+
+	struct timeval	time;
 	gettimeofday(&time,NULL);
 
-	seconde = time.tv_sec * 1000 + time.tv_usec / 1000 ;
-	deltatime = seconde - init_time ;
+	delta = time.tv_sec * 1000 + time.tv_usec / 1000 ;
 
 
-	return(deltatime);
+	return(delta);
 }

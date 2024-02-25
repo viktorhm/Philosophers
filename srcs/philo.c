@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/20 13:59:34 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/25 02:44:23 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@
 int main (int argc , char **argv)
 {
 	t_data data ;
-
+	int	i;
 if(argc == 5 || argc == 6)
 {
 	if( parsing( &data , argv , argc)) // parsing
 		ft_erreur("input");
-	if(create_mutex(&data))
+	if(init_data(&data))
 		ft_erreur("mutex");
 	if(simulation_of_life(&data))
 		ft_erreur("simulation");
 
+
+	free(data.philos);
+
+	return(0);
 }
 else
 	ft_erreur("nb_arg");

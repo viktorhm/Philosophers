@@ -6,13 +6,12 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:14:00 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/22 15:25:41 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/25 01:27:10 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-https://github.com/tremerin/Philo/blob/main/philo/set_table.c
 int parsing(t_data *data , char **argv , int argc)
 {
 
@@ -35,7 +34,6 @@ int j = 1 ;
 		if(data->round <= 0)
 			return(1);
 	}
-	data->forks = NULL;
 	data->philos = NULL;
 	return(0);
 	//data->deltat = get_time(data->nb_philo); //init (a)voir
