@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/25 04:44:56 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:31:28 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int init_data(t_data *data)
 
 int presocratiques(t_data *data)
 {
-	int	i = 0;
-	while(data->nb_philo > i++)
+	int	i = -1;
+	while(data->nb_philo > ++i)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].last_eat = data->delta_t;
@@ -72,7 +72,6 @@ long int get_time(void)
 	gettimeofday(&time,NULL);
 
 	delta = time.tv_sec * 1000 + time.tv_usec / 1000 ;
-
 
 	return(delta);
 }

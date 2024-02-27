@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/25 08:38:16 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:34:50 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ if(argc == 5 || argc == 6)
 	if(simulation_of_life(&data))
 		ft_erreur("simulation");
 
-	the_end(&data);
+
+//the_end(&data);
 
 	return(0);
 }
