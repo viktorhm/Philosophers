@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:14:00 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/10 20:07:27 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/13 09:37:53 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int parsing(t_data *data , char **argv , int argc)
 	data->time_deth = ft_atoi(argv[2]) ;
 	data->time_eat = ft_atoi(argv[3]) ;
 	data->time_slepp = ft_atoi(argv[4]);
-	if(data->nb_philo <= 2 || data->time_deth <= 6 || data->time_eat <= 6 || data->time_slepp <= 6) // pas moins de 60 ms
+	if(data->nb_philo < 1 || data->time_deth <= 6 || data->time_eat <= 6 || data->time_slepp <= 6) // pas moins de 60 ms
 		return(ft_erreur("value min",1));
 	if(argc == 6)
 	{

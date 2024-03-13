@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:17 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/11 16:23:13 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/13 09:35:33 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void print_status(char *str , t_philo *philo)
 	time = get_time() - philo->data->delta_t;
 	if(time >= 0 && check_death(philo , 0))
 	{
-		printf("%ld %d%s", time , philo->id , str);
+		printf("%ld %d%s", time, philo->id, str);
 	}
 }
 

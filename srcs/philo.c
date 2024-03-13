@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/10 20:08:55 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/13 09:41:33 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void the_end(t_data * data)
 	while(!check_is_run(data))
 		ft_usleep(1);
 		
-	while(i++  < data->nb_philo)
+	while(++i < data->nb_philo)
 		pthread_join(data->philos[i].t_id, NULL);
 	pthread_mutex_destroy(&data->mutex);
 	i = - 1;
@@ -42,7 +42,7 @@ void the_end(t_data * data)
 		pthread_mutex_destroy(&data->philos[i].fork_left);
 	}
 	
-free(data->philos);
+//free(data->philos);
 }
 
 
