@@ -8,18 +8,18 @@ SRCS		=  srcs/init.c srcs/parsing.c srcs/philo.c srcs/simulation.c
 OBJS		= $(SRCS:.c=.o)
 
 CC		= gcc
-CFLAGS		= -Werror -Wall -Wextra -g -I$(HEADER) -pthread
+CFLAGS		=  -g -I$(HEADER) -pthread
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADER)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	@rm -f $(OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

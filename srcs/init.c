@@ -6,20 +6,21 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/27 03:31:28 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:00:30 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "philosophers.h"
 
-int init_data(t_data *data)
+int init_data(t_data *data , int argc)
 {
 	if(!(data->philos = malloc(sizeof(t_philo) * data-> nb_philo)))
-		return(1);
+		return(2);
 
 	data->delta_t = get_time();
-	data->round = 0;
+	if(argc == 5)
+		data->round = -1;
 	data->nb_p_fninsh = 0 ;
 	data->stop= 0 ;
 
@@ -67,11 +68,11 @@ int set_fork(t_data *data ,int i)
 long int get_time(void)
 {
 	long int delta = 0 ;
-
 	struct timeval	time;
+
 	gettimeofday(&time,NULL);
 
-	delta = time.tv_sec * 1000 + time.tv_usec / 1000 ;
+	delta = (time.tv_sec * 1000) + (time.tv_usec / 1000) ;
 
 	return(delta);
 }

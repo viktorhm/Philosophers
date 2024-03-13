@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/27 03:34:50 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:08:55 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,18 @@ void the_end(t_data * data)
 
 	int i = -1 ;
 	while(!check_is_run(data))
-		usleep(1);
+		ft_usleep(1);
+		
 	while(i++  < data->nb_philo)
 		pthread_join(data->philos[i].t_id, NULL);
 	pthread_mutex_destroy(&data->mutex);
 	i = - 1;
-	while(++i< data->nb_philo)
+	while(++i < data->nb_philo)
 	{
 		pthread_mutex_destroy(&data->philos[i].fork_left);
 	}
-	if(data->stop == 2) // exection de merde
-		printf("shit");
-	free(data->philos);
-
+	
+free(data->philos);
 }
 
 
@@ -53,22 +52,18 @@ int main (int argc , char **argv)
 
 if(argc == 5 || argc == 6)
 {
-	if( parsing( &data , argv , argc)) // parsing
-		ft_erreur("input");
-	if(init_data(&data))
-		ft_erreur("mutex");
-	if(simulation_of_life(&data))
-		ft_erreur("simulation");
-
-
-//the_end(&data);
-
-	return(0);
+	if(ft_erreur("input", parsing( &data , argv , argc)))
+		return(1);
+	if(ft_erreur("mutex", init_data(&data , argc)))
+	{
+		//free(data.philos);
+		return(1);
+	}
+	ft_erreur("simulation", simulation_of_life(&data));
+	the_end(&data);
 }
 else
-{
-	ft_erreur("nb_arg");
-}
+	ft_erreur("nb_arg" , 1 );
 
-	return(0);
+return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/02/25 08:37:24 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:00:59 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,15 @@ typedef struct s_data
 	long	time_eat;
 	long	time_slepp;
 // USE FOR MY
-	int		nb_p_fninsh;
+	int		nb_p_fninsh; // nb de philo creer
 	int		stop;
 	long	delta_t; //start time
-	long	round; // optionale not verry
+	long	round; // is argv 4 
 //MUTEX of SHIT
-	pthread_mutex_t	mutex;
-	pthread_mutex_t	dead;
-	pthread_mutex_t	eat; // why ??
-	pthread_mutex_t	finish;
-
-
-
-
+	pthread_mutex_t	mutex; // print status
+	pthread_mutex_t	dead; // is dead
+	pthread_mutex_t	eat; // is eat
+	pthread_mutex_t	finish; // end ? ~ OR NOT
 }			t_data ;
 
 typedef struct s_philo
@@ -55,7 +51,7 @@ typedef struct s_philo
 	pthread_mutex_t *fork_right;
 	pthread_mutex_t fork_left;
 
-	t_data *data; //uslesse ?
+	t_data *data; 
 
 	long int last_eat;
 	int	nb_eat;
@@ -66,14 +62,14 @@ typedef struct s_philo
 // parsing //
 int parsing(t_data *data , char **argv , int argc);
 int is_char_neg (char *str);
-int ft_erreur(char *str);
+int ft_erreur(char *str , int value);
 int ft_atoi(char *str);
 
-//init// getion erreur enixistant fonction phtread ??
-int init_data(t_data *data);
+//init// getion erreur
+int init_data(t_data *data , int argc);
 int presocratiques(t_data *data);
 int set_fork(t_data *data ,int i);
-long int get_time(); // is  not better working
+long int get_time(); 
 
 //simulation//
 void *thead(void *tmp_data);
