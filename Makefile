@@ -3,7 +3,7 @@ NAME		= philosophers
 
 HEADER		= ./includes/
 
-SRCS		=  srcs/init.c srcs/parsing.c srcs/philo.c srcs/simulation.c
+SRCS		=  srcs/init.c srcs/parsing.c srcs/philo.c srcs/simulation.c srcs/utils.c
 
 OBJS		= $(SRCS:.c=.o)
 
