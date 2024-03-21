@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:17 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/13 15:23:30 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:43:38 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*is_dead(void *data)
 	ft_usleep(philo->data->time_deth + 1);
 	pthread_mutex_lock(&philo->data->eat);
 	pthread_mutex_lock(&philo->data->finish);
-	if (check_death(philo, 0) && !philo->finish
+	if (check_death(philo, 0) && !philo->end
 		&& ((get_time() - philo->last_eat) >= (long)(philo->data->time_deth)))
 	{
 		pthread_mutex_unlock(&philo->data->eat);
@@ -88,7 +88,7 @@ void	*thead(void *tmp_data)
 		if ((int)++philo->nb_eat == philo->data->round)
 		{
 			pthread_mutex_lock(&philo->data->finish);
-			philo->finish = 1;
+			philo->end = 1;
 			philo->data->nb_p_fninsh++ ;
 			if (philo->data->nb_p_fninsh == philo->data->nb_philo)
 			{
@@ -112,7 +112,7 @@ int	simulation_of_life(t_data *data)
 		data->philos[i].data = data;
 		if (pthread_create(&data->philos[i].t_id, NULL,
 				thead, &data->philos[i]) != 0)
-			return (1);
+			ft_erreur("erreur mutex ",1);
 		i++;
 	}
 	return (0);

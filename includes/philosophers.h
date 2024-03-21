@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/10 20:00:59 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:45:58 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_philo
 	pthread_t		t_deah;
 	int			id;
 	int			nb_eat;
-	int			finish;
+	int			end;
 	long int		last_eat;
 }		t_philo;
 

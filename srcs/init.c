@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/10 20:00:30 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:45:58 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	presocratiques(t_data *data)
 		data->philos[i].id = i + 1;
 		data->philos[i].last_eat = data->delta_t;
 		data->philos[i].nb_eat = 0;
-		data->philos[i].finish = 0;
+		data->philos[i].end = 0;
 		set_fork(data, i);
 	}
 	return (0);
