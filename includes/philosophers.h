@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/21 14:45:58 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/07 07:15:14 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,63 +19,106 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <errno.h>
 
-typedef struct s_philo		t_philo;
-typedef struct s_data
+typedef struct s_data	t_data;
+
+typedef enum e_write
 {
-	t_philo		*philos;
-	long		time_deth;
-	long		time_eat;
-	long		time_slepp;
-	long		delta_t;
-	long		round;
-	int			nb_philo;
-	int			nb_p_fninsh;
-	int			stop;
+	EAT,
+	THINK,
+	TAKE_FORK,
+	DEAD,
+	SLEP,
+}			t_write;
 
-	pthread_mutex_t		mutex;
-	pthread_mutex_t		dead;
-	pthread_mutex_t		eat;
-	pthread_mutex_t		finish;
+typedef enum e_opcode
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}			t_opcode;
 
-}		t_data;
+typedef struct s_fork
+{
+	pthread_mutex_t fork;
+	int	fork_id;
+
+
+}	t_fork;
 
 typedef struct s_philo
 {
-	t_data			*data;
-	pthread_mutex_t		*fork_right;
-	pthread_mutex_t		fork_left;
-	pthread_t		t_id;
-	pthread_t		t_deah;
 	int			id;
-	int			nb_eat;
-	int			end;
-	long int		last_eat;
-}		t_philo;
+	long		conter;
+	bool		full;
+	long		last_eat;
 
-// parsing //
+	t_fork		*left_fork;
+	t_fork		*right_fork;
+	pthread_mutex_t philo_mutex;
+	t_data		*data;
+	pthread_t	thread_id;
+}			t_philo;
+
+
+typedef struct s_data
+{
+	t_philo		*philos;
+	t_fork		*forks;
+	pthread_mutex_t data_mutex;
+	pthread_mutex_t write;
+	long		time_deth;
+	long		time_eat;
+	long		time_slepp;
+
+	long		delta_t;
+	long		round;
+
+	int			nb_philo;
+	int			nb_p_fninsh;
+	bool			end_simulation;
+	bool		all_redy;
+
+}		t_data;
+
+int	main(int argc, char **argv);
+/*init.c*/
+static void assign_fork(t_philo *philo ,t_fork *forks , int i);
+static void philo_init(t_data *data);
+void data_init(t_data *data);
+
+/* parsing.c */
 int	parsing(t_data *data, char **argv, int argc);
 int	is_char_neg(char *str);
 int	ft_erreur(char *str, int value);
 int	ft_atoi(char *str);
 
-//init// getion erreur
-int		init_data(t_data *data, int argc);
-int		presocratiques(t_data *data);
-int		set_fork(t_data *data, int i);
+/*safe_init.c*/
+
+void safe_mutex( pthread_mutex_t *mutex, t_opcode opcode);
+void safe_thread( pthread_t *thread, void *(*function)(void *)
+	, void *data, t_opcode opcode);
+
+/*lock_unlock*/
+void set_bool(pthread_mutex_t *mutex , bool *dest , bool value);
+bool get_bool(pthread_mutex_t *mutex , bool *value);
+void set_long(pthread_mutex_t *mutex , long *dest , long value);
+long get_long(pthread_mutex_t *mutex , long *value);
+bool	simulation_end(t_data *data);
+
+/*utils.c*/
+void		*ft_malloc(size_t bytes);
+void		ft_exit(char *str);
 long int	get_time(void);
+void		write_status(t_write status,t_philo *philo);
 
-//simulation//
-void	*thead(void *tmp_data);
-int	simulation_of_life(t_data *data);
-void	sleep_think(t_philo *philo);
-void	activity(t_philo *philo);
-void	*is_dead(void *data);
-void	*thead(void *tmp_data);
-int	simulation_of_life(t_data *data);
+/*simulation*/
+void init_simulation(t_data *data);
+void wait_threads(t_data *data);
 
-//utils.c
-void	ft_usleep(long int time_in_ms);
-void	print_status(char *str, t_philo *philo);
-int	check_death(t_philo *philo, int i);
 #endif

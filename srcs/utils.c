@@ -6,42 +6,54 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:21:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/03/21 14:10:44 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/07 07:10:54 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	print_status(char *str, t_philo *philo)
-{
-	long int	time;
 
-	time = -1;
-	time = get_time() - philo->data->delta_t;
-	if (time >= 0 && check_death(philo, 0))
-		printf("%ld %d%s", time, philo->id, str);
+void	*ft_malloc(size_t bytes)
+{
+	void *result;
+
+	result = malloc(bytes);
+	if (NULL == result)
+		ft_exit("malloc");
+	return(result);
+
 }
 
-void	ft_usleep(long int time_in_ms)
+long int	get_time(void)
 {
-	long int	start_time;
+	struct timeval	time;
+	long int		delta;
 
-	start_time = 0;
-	start_time = get_time();
-	while ((get_time() - start_time) < time_in_ms)
-		usleep(time_in_ms / 10);
+	delta = 0;
+	gettimeofday(&time, NULL);
+	delta = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (delta);
 }
 
-int	check_death(t_philo *philo, int i)
+void	write_status(t_write status,t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->dead);
-	if (i)
-		philo->data->stop = i;
-	if (philo->data->stop)
-	{
-		pthread_mutex_unlock(&philo->data->dead);
-		return (0);
-	}
-	pthread_mutex_unlock(&philo->data->dead);
-	return (1);
+	long now;
+
+	if(philo->full)
+		return;
+
+	now = get_time() - philo->data->delta_t;
+
+	safe_mutex(&philo->data->write ,LOCK);
+	if(status == TAKE_FORK && !simulation_end(philo->data))
+		printf("%ld %d \x1b[38;2;100;100;100;1m has taken a fork\e[0m \n", now, philo->id);
+	else if(status == EAT && !simulation_end(philo->data))
+		printf("%ld %d \x1b[38;2;0;255;0;1m is eating\e[0m\n", now, philo->id);
+	else if(status == THINK && !simulation_end(philo->data))
+		printf("%ld %d \x1b[38;2;255;255;0;1m is thinking\e[0m \n", now, philo->id);
+	else if(status == SLEP && !simulation_end(philo->data))
+		printf("%ld %d \x1b[38;2;100;150;150;1m is sleeping\e[0m \n", now, philo->id);
+	else if(status == THINK && !simulation_end(philo->data))
+		printf("%ld %d \x1b[38;2;255;255;0;1m is thinking\e[0m \n", now, philo->id);
+	safe_mutex(&philo->data->write ,UNLOCK);
 }

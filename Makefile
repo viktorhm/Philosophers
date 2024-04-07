@@ -1,9 +1,16 @@
 
-NAME		= philosophers
+NAME		= philo
 
 HEADER		= ./includes/
 
-SRCS		=  srcs/init.c srcs/parsing.c srcs/philo.c srcs/simulation.c srcs/utils.c
+SRCS		=srcs/init.c \
+			srcs/parsing.c \
+			srcs/main.c \
+			srcs/simulation.c \
+			srcs/utils.c \
+			srcs/lock_unlock.c \
+			srcs/safe_init.c \
+
 
 OBJS		= $(SRCS:.c=.o)
 
