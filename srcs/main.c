@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/07 07:17:57 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/08 01:03:46 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 		data_init(&data);
 		init_simulation(&data);
 
+		//ft_free(data);
 		free(data.philos);
 		free(data.forks);
 	}

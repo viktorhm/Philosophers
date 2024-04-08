@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/07 07:15:14 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/08 03:14:42 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ typedef struct s_data
 	t_fork		*forks;
 	pthread_mutex_t data_mutex;
 	pthread_mutex_t write;
+	pthread_t	reaper;
 	long		time_deth;
 	long		time_eat;
 	long		time_slepp;
+	long		threads_running;
 
 	long		delta_t;
 	long		round;
@@ -115,10 +117,15 @@ bool	simulation_end(t_data *data);
 void		*ft_malloc(size_t bytes);
 void		ft_exit(char *str);
 long int	get_time(void);
+bool	philo_runnig(pthread_mutex_t *mutex, long *threads , long philo_nbr);
+void	increase_long(pthread_mutex_t *mutex, long *value);
 void		write_status(t_write status,t_philo *philo);
 
 /*simulation*/
 void init_simulation(t_data *data);
 void wait_threads(t_data *data);
+
+/* phreaper*/
+void	*ft_reaper(void *tmp_data);
 
 #endif

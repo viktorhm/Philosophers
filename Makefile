@@ -10,6 +10,7 @@ SRCS		=srcs/init.c \
 			srcs/utils.c \
 			srcs/lock_unlock.c \
 			srcs/safe_init.c \
+			srcs/reaper.c\
 
 
 OBJS		= $(SRCS:.c=.o)

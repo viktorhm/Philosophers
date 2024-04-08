@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 03:40:01 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/07 07:11:50 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:02:38 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void safe_mutex( pthread_mutex_t *mutex, t_opcode opcode)
 /*in the case or error*/
 static void	error_thread(int status)
 {
-	if(status = 0 )
+	if(status == 0 )
 		return ;
 	ft_exit("THREAD");
 }
