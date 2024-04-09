@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/08 03:14:42 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:18:03 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ typedef struct s_data
 
 }		t_data;
 
+void ft_clean(t_data *data);
+void	ft_usleep(long int time_in_ms);
 int	main(int argc, char **argv);
 /*init.c*/
 static void assign_fork(t_philo *philo ,t_fork *forks , int i);

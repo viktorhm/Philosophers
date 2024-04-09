@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/08 01:24:49 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:13:39 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void data_init(t_data *data)
 	data->threads_running = 0;
 	data->philos = ft_malloc(sizeof(t_philo)*data->nb_philo);
 	data->forks = ft_malloc(sizeof(t_fork)* data->nb_philo);
+	data->delta_t = 0 ;
 	safe_mutex(&data->data_mutex , INIT);
 	safe_mutex(&data->write, INIT);
 

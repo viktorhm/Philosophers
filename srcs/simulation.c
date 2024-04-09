@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:17 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/08 03:16:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:20:14 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void eat(t_philo *philo)
 	set_long(&philo->philo_mutex,&philo->last_eat , get_time());
 	philo->conter++;
 	write_status(EAT , philo);
+	ft_usleep(philo->data->time_eat);
 	if(philo->data->round > 0 && philo->conter == philo->data->round)
 		set_bool(&philo->philo_mutex , &philo->full , true);
 
@@ -34,28 +35,26 @@ static void thinking(t_philo *philo)
 {
 	write_status(THINK, philo);
 
+	ft_usleep(philo->data->time_slepp);
 }
 
 static void *simulation(void *data)
 {
 	t_philo *philo ;
-
 	philo = (t_philo *)data;
-
 	wait_threads(philo->data);
-
-
-
 
 	while(!simulation_end(philo->data))
 		{
 			if(philo->full)
 				break;
+
 			eat(philo);
-			//thinking(philo);
+
+			ft_usleep(philo->data->time_slepp);
+			thinking(philo);
 
 		}
-
 
 
 }
@@ -68,7 +67,7 @@ void init_simulation(t_data *data)
 	if(data->round == 0)
 		return ;
 	else if(data->nb_philo == 1)
-		return ;//safe_thread(&data->philos[0].thread_id, lone_)
+		return ;
 	else
 	{
 		while(data->nb_philo > ++i)
