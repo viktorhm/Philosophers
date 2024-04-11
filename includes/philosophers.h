@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:55 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/09 18:18:03 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:24:02 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void		write_status(t_write status,t_philo *philo);
 /*simulation*/
 void init_simulation(t_data *data);
 void wait_threads(t_data *data);
+void	*socrate(void *data);
 
 /* phreaper*/
 void	*ft_reaper(void *tmp_data);

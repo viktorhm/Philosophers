@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/09 18:17:43 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:15:51 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	main(int argc, char **argv)
 	{
 		if (ft_erreur("input", parsing(&data, argv, argc)))
 			return (1);
-
-
 		data_init(&data);
 		init_simulation(&data);
 		ft_clean(&data);

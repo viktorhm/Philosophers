@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:21:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/08 02:23:32 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:03:09 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	write_status(t_write status,t_philo *philo)
 		printf("%ld %d \x1b[38;2;100;150;150;1m is sleeping\e[0m \n", now, philo->id);
 	else if(status == THINK && !simulation_end(philo->data))
 		printf("%ld %d \x1b[38;2;255;255;0;1m is thinking\e[0m \n", now, philo->id);
+	else if(status == DEAD )
+		printf("%ld %d \x1b[38;2;255;0;0;1m is dead\e[0m \n", now, philo->id);
 	safe_mutex(&philo->data->write ,UNLOCK);
 }
 
@@ -68,10 +70,10 @@ bool	philo_runnig(pthread_mutex_t *mutex, long *threads , long philo_nbr)
 {
 	bool	i;
 
-	i = 0;
+	i = false;
 	safe_mutex(mutex,LOCK);
 	if(*threads == philo_nbr)
-		i = 1;
+		i = true;
 	safe_mutex(mutex,UNLOCK);
 	return(i);
 }
@@ -81,5 +83,4 @@ void	increase_long(pthread_mutex_t *mutex, long *value)
 	safe_mutex(mutex, LOCK);
 	(*value)++;
 	safe_mutex(mutex, UNLOCK);
-
 }
