@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 22:15:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/11 23:15:51 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:53:30 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ int	main(int argc, char **argv)
 		data_init(&data);
 		init_simulation(&data);
 		ft_clean(&data);
-
 	}
 	else
-		ft_erreur("nb_arg", 1);
+	{
+		printf("plese invalid input : ./philo 2 200 100 100");
+		return(1);
+	}
+		
 	return (0);
 }
 

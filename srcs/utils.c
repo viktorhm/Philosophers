@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:21:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/11 23:03:09 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:08:28 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	write_status(t_write status,t_philo *philo)
 {
 	long now;
 
-	if(philo->full)
-		return;
-
 	now = get_time() - philo->data->delta_t;
 
-	safe_mutex(&philo->data->write ,LOCK);
+	if(get_bool(&philo->philo_mutex, &philo->full))
+		return;
+	safe_mutex(&philo->data->write, LOCK);
+	
 	if(status == TAKE_FORK && !simulation_end(philo->data))
 		printf("%ld %d \x1b[38;2;100;100;100;1m has taken a fork\e[0m \n", now, philo->id);
 	else if(status == EAT && !simulation_end(philo->data))

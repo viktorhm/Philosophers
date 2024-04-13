@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:17 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/11 22:38:13 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:30:46 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*socrate(void *data)
 	write_status(TAKE_FORK, philo);
 	while(!simulation_end(philo->data))
 		{
-		printf("test\n");
 		ft_usleep(philo->data->time_deth+1);
 		}
 	return(NULL);

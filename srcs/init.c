@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:17:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/09 17:13:39 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:52:07 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static void assign_fork(t_philo *philo ,t_fork *forks , int i)
 {
 	int nb;
+
 	nb = philo->data->nb_philo;
 	philo->right_fork = &forks[(i + 1) % nb];
 	philo->left_fork = &forks[i];
@@ -24,20 +25,19 @@ static void assign_fork(t_philo *philo ,t_fork *forks , int i)
 		philo->right_fork = &forks[i];
 		philo->left_fork = &forks[(i + 1) % nb];
 	}
-
-
 }
 
 static void philo_init(t_data *data)
 {
 	int	i;
 	t_philo *philo;
+
 	i = -1;
 	while(data->nb_philo > ++i)
 	{
 		philo = data->philos + i;
 		philo->id = i + 1;
-		philo->full =false;
+		philo->full = false;
 		safe_mutex(&philo->philo_mutex, INIT);
 		philo->conter = 0 ;
 		philo->data = data;
@@ -53,13 +53,12 @@ void data_init(t_data *data)
 
 	i = -1;
 	data->end_simulation = false;
-	data->threads_running = 0;
+	data->threads_running = false;
+	data->delta_t = 0 ;
 	data->philos = ft_malloc(sizeof(t_philo)*data->nb_philo);
 	data->forks = ft_malloc(sizeof(t_fork)* data->nb_philo);
-	data->delta_t = 0 ;
 	safe_mutex(&data->data_mutex , INIT);
 	safe_mutex(&data->write, INIT);
-
 	while(data->nb_philo > ++i)
 	{
 		safe_mutex(&data->forks[i].fork, INIT);

@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 01:13:48 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/11 23:10:08 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:52:15 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,17 @@ void	*ft_reaper(void *tmp_data)
 	data = (t_data *)tmp_data;
 
 
-	if(data->nb_philo > 2)
+	if(data->nb_philo > 1)
 		while(!philo_runnig(&data->data_mutex, &data->threads_running , data->nb_philo ))
 			;
 
 	while(!simulation_end(data))
 	{
-
 		i = -1;
 		while(data->nb_philo > ++i && !simulation_end(data))
 		{
-
 			if(philo_dead(data->philos + i)&& !simulation_end(data))
 			{
-
 				set_bool(&data->data_mutex , &data->end_simulation , true);
 				write_status( DEAD,data->philos + i );
 			}
