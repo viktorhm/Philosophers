@@ -16,7 +16,7 @@ SRCS		=srcs/init.c \
 OBJS		= $(SRCS:.c=.o)
 
 CC		= gcc
-CFLAGS		=  -g -I$(HEADER) -pthread
+CFLAGS		=  -g -I$(HEADER) -pthread -Wextra -Wall -Werror
 
 all: $(NAME)
 

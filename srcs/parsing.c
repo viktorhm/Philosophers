@@ -6,7 +6,7 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:14:00 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/11 23:11:31 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/13 16:16:03 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	parsing(t_data *data, char **argv, int argc)
 	}
 	else
 		data->round = -1;
-	data->philos = NULL;
 	return (0);
 }
 

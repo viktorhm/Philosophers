@@ -6,25 +6,23 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:21:38 by vharatyk          #+#    #+#             */
-/*   Updated: 2024/04/12 17:08:28 by vharatyk         ###   ########.fr       */
+/*   Updated: 2024/04/13 16:27:38 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-
 void	*ft_malloc(size_t bytes)
 {
-	void *result;
+	void	*result;
 
 	result = malloc(bytes);
 	if (NULL == result)
 		ft_exit("malloc");
-	return(result);
-
+	return (result);
 }
 
-long int	get_time(void)
+long	get_time(void)
 {
 	struct timeval	time;
 	long int		delta;
@@ -35,49 +33,40 @@ long int	get_time(void)
 	return (delta);
 }
 
-void	write_status(t_write status,t_philo *philo)
+void	write_status(t_write status, t_philo *philo)
 {
-	long now;
+	long	now;
 
 	now = get_time() - philo->data->delta_t;
-
-	if(get_bool(&philo->philo_mutex, &philo->full))
-		return;
+	if (get_bool(&philo->philo_mutex, &philo->full))
+		return ;
 	safe_mutex(&philo->data->write, LOCK);
-	
-	if(status == TAKE_FORK && !simulation_end(philo->data))
-		printf("%ld %d \x1b[38;2;100;100;100;1m has taken a fork\e[0m \n", now, philo->id);
-	else if(status == EAT && !simulation_end(philo->data))
-		printf("%ld %d \x1b[38;2;0;255;0;1m is eating\e[0m\n", now, philo->id);
-	else if(status == THINK && !simulation_end(philo->data))
-		printf("%ld %d \x1b[38;2;255;255;0;1m is thinking\e[0m \n", now, philo->id);
-	else if(status == SLEP && !simulation_end(philo->data))
-		printf("%ld %d \x1b[38;2;100;150;150;1m is sleeping\e[0m \n", now, philo->id);
-	else if(status == THINK && !simulation_end(philo->data))
-		printf("%ld %d \x1b[38;2;255;255;0;1m is thinking\e[0m \n", now, philo->id);
-	else if(status == DEAD )
-		printf("%ld %d \x1b[38;2;255;0;0;1m is dead\e[0m \n", now, philo->id);
-	safe_mutex(&philo->data->write ,UNLOCK);
+	if (status == TAKE_FORK && !simulation_end(philo->data))
+		printf("%ld %d\x1b[38;2;100;100;100;1m has taken a fork\e[0m\n"\
+		, now, philo->id);
+	else if (status == EAT && !simulation_end(philo->data))
+		printf("%ld %d\x1b[38;2;0;255;0;1m is eating\e[0m\n", now, philo->id);
+	else if (status == THINK && !simulation_end(philo->data))
+		printf("%ld %d\x1b[38;2;255;255;0;1m is thinking\e[0m\n"\
+		, now, philo->id);
+	else if (status == SLEP && !simulation_end(philo->data))
+		printf("%ld %d\x1b[38;2;100;150;150;1m is sleeping\e[0m\n"\
+		, now, philo->id);
+	else if (status == THINK && !simulation_end(philo->data))
+		printf("%ld %d\x1b[38;2;255;255;0;1m is thinking\e[0m\n"\
+		, now, philo->id);
+	else if (status == DEAD)
+		printf("%ld %d\x1b[38;2;255;0;0;1m died\e[0m\n", now, philo->id);
+	safe_mutex(&philo->data->write, UNLOCK);
 }
 
-void wait_threads(t_data *data)
+void	wait_threads(t_data *data)
 {
-	while (!get_bool(&data->data_mutex , &data->all_redy))
+	while (!get_bool(&data->data_mutex, &data->all_redy))
 		;
 }
 
-bool	philo_runnig(pthread_mutex_t *mutex, long *threads , long philo_nbr)
-{
-	bool	i;
-
-	i = false;
-	safe_mutex(mutex,LOCK);
-	if(*threads == philo_nbr)
-		i = true;
-	safe_mutex(mutex,UNLOCK);
-	return(i);
-}
-
+/**/
 void	increase_long(pthread_mutex_t *mutex, long *value)
 {
 	safe_mutex(mutex, LOCK);
